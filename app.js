@@ -9,12 +9,11 @@ var usersRouter = require('./routes/users');
 var clientesRouter = require('./routes/clientes');
 var listaRouter = require('./routes/lista');
 
-
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,7 +25,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/clientes', clientesRouter);
 app.use('/lista', listaRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,15 @@
+<h1>Lista de Itens</h1>
+
+{{#if itensParaView}}
+  {{#if itensParaView.length}}
+    <ul>
+      {{#each itensParaView}}
+        <li>{{this.name}} - {{this.id}}</li>  <!-- Acessando as propriedades de cada objeto -->
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>Não há itens para mostrar.</p>
+  {{/if}}
+{{else}}
+  <p>Não há dados disponíveis.</p>
+{{/if}}
