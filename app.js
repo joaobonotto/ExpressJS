@@ -1,17 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// app.js
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const createError = require('http-errors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var clientesRouter = require('./routes/clientes');
-var listaRouter = require('./routes/lista');
+// Importar as rotas
+const indexRouter = require('./routes/index');
+const produtosRouter = require('./routes/produtos');
 
-var app = express();
+const app = express();
 
-// view engine setup
+// Configuração do template engine (HBS)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -21,23 +21,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/clientes', clientesRouter);
-app.use('/lista', listaRouter);
+// Usar a rota de produtos
+app.use('/produtos', produtosRouter);
 
-// catch 404 and forward to error handler
+// Outras rotas que você já tem
+app.use('/', indexRouter);
+
+// Tratamento de erro 404
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Handler de erro
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
